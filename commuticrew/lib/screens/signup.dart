@@ -57,11 +57,17 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(title: const Text('Sign Up')),
-      body: Padding(
+      body: Container( width: double.infinity, // Full width
+        height: double.infinity, // Full height
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 255, 254, 182), // Background color
+        ), child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40.0),
         child: Center(
-          child: SingleChildScrollView(
+          child: Column (
+            children: [ Container(margin: const EdgeInsets.only(top: 60.0), child: const Image(image: AssetImage('assets/images/allyintroduction.png'))),SingleChildScrollView(
             child: Form(
               key: _formKey,
               child: Column(
@@ -73,6 +79,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                       labelText: 'Enter your email',
+                      labelStyle: TextStyle(color : Color(0xffd7263d)),
                     ),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
@@ -91,6 +98,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                       labelText: 'Enter your password',
+                      labelStyle: TextStyle(color : Color(0xffd7263d)),
                     ),
                     obscureText: true,
                     validator: (value) {
@@ -109,6 +117,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                       labelText: 'Confirm your password',
+                      labelStyle: TextStyle(color : Color(0xffd7263d)),
                     ),
                     obscureText: true,
                     validator: (value) {
@@ -124,21 +133,21 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(height: 40),
                   ElevatedButton(
                     onPressed: _signUp,
-                    child: const Text('Sign Up', style: TextStyle(fontSize: 20)),
+                    child: const Text('Sign Up', style: TextStyle(fontSize: 20,  color: Color(0xff227619))),
                   ),
                   const SizedBox(height: 20),
                   TextButton(
                     onPressed: () {
                       Navigator.pushReplacementNamed(context, '/signin');
                     },
-                    child: const Text('Already have an account? Sign In'),
+                    child: const Text('Already have an account? Sign In', style: TextStyle(color : Color(0xffd7263d)),),
                   ),
                 ],
-              ),
+          ),
             ),
           ),
-        ),
+        ]),
       ),
-    );
+    )));
   }
 }

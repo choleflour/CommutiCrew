@@ -34,47 +34,62 @@ class _SigninScreenState extends State<SigninScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Sign In')),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40.0),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 40),
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter your email',
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) => value!.isEmpty ? 'Enter email' : null,
-                  ),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    controller: _passwordController,
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter your password',
-                    ),
-                    obscureText: true,
-                    validator: (value) =>
-                        value!.length < 6 ? 'Password must be 6+ chars' : null,
-                  ),
-                  const SizedBox(height: 40),
-                  ElevatedButton(
-                    onPressed: _signIn,
-                    child: const Text('Sign In', style: TextStyle(fontSize: 20)),
-                  ),
-                ],
-              ),
-            ),
-          ),
+      body: Container (
+        width: double.infinity, // Full width
+        height: double.infinity, // Full height
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 255, 254, 182), // Background color
         ),
-      ),
-    );
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40.0),
+          child: Center(
+            child: Column (
+            children: [ Container(margin: const EdgeInsets.only(top: 60.0), child: const Image(image: AssetImage('assets/images/allyintroduction.png'))), SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: 40),
+                        TextFormField(
+                          controller: _emailController,
+                          decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Enter your email',
+                            labelStyle: TextStyle(color : Color(0xffd7263d)),
+                          ),
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (value) => value!.isEmpty ? 'Enter email' : null,
+                        ),
+                        const SizedBox(height: 20),
+                        TextFormField(
+                          controller: _passwordController,
+                          decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Enter your password',
+                            labelStyle: TextStyle(color : Color(0xffd7263d)),
+                          ),
+                          obscureText: true,
+                          validator: (value) =>
+                              value!.length < 6 ? 'Password must be 6+ chars' : null,
+                        ),
+                        const SizedBox(height: 40),
+                        ElevatedButton(
+                          onPressed: _signIn,
+                          // style: ButtonStyle(
+                          //   backgroundColor: MaterialStateProperty.all<Color>(Color(0xff227619)),
+                          // ),
+                          child: const Text("Let's Begin !!", style: TextStyle(fontSize: 20, color: Color(0xff227619)),)
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ]),
+          ), ),
+        ),
+      );
   }
 }
