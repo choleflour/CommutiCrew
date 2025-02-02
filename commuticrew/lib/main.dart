@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
       },
       title: 'CommutiCrew',
       theme: ThemeData(
+        fontFamily: 'Padauk',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -95,6 +96,7 @@ class MyHomePage extends StatelessWidget {
                 color: Colors.blue[900],
                 fontWeight: FontWeight.bold,
                 fontSize: 80,
+                fontFamily: 'Pangolin',
               ),
             ),
           ),
@@ -131,7 +133,7 @@ class MyHomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/signup');
               },
               child:
-                  const Text('Make an Account', style: TextStyle(fontSize: 35)),
+                  const Text('Make an Account', style: TextStyle(fontSize: 35, fontFamily: 'Pangolin')),
             ),
           ),
           Container(

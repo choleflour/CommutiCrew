@@ -94,3 +94,14 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+fonts:
+    - family: Padauk
+      fonts:
+        - asset: fonts/Padauk-Regular.ttf
+        # - asset: fonts/Raleway-Italic.ttf
+        #   style: italic
+    - family: Pangolin
+      fonts:
+        - asset: fonts/Pangolin-Regular.ttf
+        # - asset: fonts/RobotoMono-Bold.ttf
