@@ -49,10 +49,9 @@
 
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>Location required to show your position on map</string>
-	<true/>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
     <string>Location required to track your position in background</string>
-	<true/>
+	
     <key>UIBackgroundModes</key>
     <array>
         <string>location</string>
