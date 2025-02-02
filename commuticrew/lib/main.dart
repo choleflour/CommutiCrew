@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'screens/home.dart';
 import 'screens/signin.dart';
 import 'screens/signup.dart';
-// import 'screens/search.dart';
+import 'screens/search.dart';
 import 'screens/crew.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomeScreen(),
         '/signin': (context) => SigninScreen(),
         '/signup': (context) => SignupScreen(),
-        // '/search': (context) => SearchScreen(),
+        '/search': (context) => SearchScreen(),
         '/crew': (context) => BlankScreen(),
         
       },
@@ -172,12 +172,20 @@ class MyHomePage extends StatelessWidget {
                 },
                 child: const Text(
                   'Make an Account',
-                  style: TextStyle(fontSize: 25, fontFamily: 'Pangolin'),
+                  style: TextStyle(fontSize: 18, fontFamily: 'Pangolin'),
                 ),
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 40.0),
+              margin: const EdgeInsets.only(top: 20.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/search');
+                },
+                child: const Text('Search'),
+              ),
+            ),
+            Container(
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/home');
@@ -185,6 +193,7 @@ class MyHomePage extends StatelessWidget {
                 child: const Text('Go to Map'),
               ),
             ),
+            
             Container(
               child: ElevatedButton(
                 onPressed: () {

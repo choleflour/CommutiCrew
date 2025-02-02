@@ -114,6 +114,7 @@ void dispose() {
         markerId: const MarkerId('origin'),
         position: origin,
         infoWindow: const InfoWindow(title: 'Origin'),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
       ),
       Marker(
         markerId: const MarkerId('destination'),
