@@ -110,67 +110,78 @@ class MyHomePage extends StatelessWidget {
     );
 
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              'Welcome to Commuti Crew!!',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.blue[900],
-                fontWeight: FontWeight.bold,
-                fontSize: 80,
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-          Container(
-            margin: const EdgeInsets.only(top: 40.0, left: 20.0, right: 20.0),
-            child: ElevatedButton(
-              style: filledButtonStyle,
-              onPressed: () {
-                Navigator.pushNamed(context, '/signin');
-              },
-              child: const Text('Sign In', style: TextStyle(fontSize: 45)),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 40.0, bottom: 20.0, left: 20.0, right: 20.0),
-            child: TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-                overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                  (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered)) {
-                      return Colors.blue.withOpacity(0.44);
-                    }
-                    if (states.contains(MaterialState.focused) ||
-                        states.contains(MaterialState.pressed)) {
-                      return Colors.blue.withOpacity(0.82);
-                    }
-                    return null;
-                  },
+      body: Container(
+        width: double.infinity, // Full width
+        height: double.infinity, // Full height
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 255, 254, 182), // Background color
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Image(image: AssetImage('assets/images/alligator.png')),
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                'Welcome to Commuti- Crew!!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.blue[900],
+                  fontWeight: FontWeight.bold,
+                  fontSize: 64,
+                  fontFamily: 'Pangolin',
                 ),
               ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/signup');
-              },
-              child:
-                  const Text('Make an Account', style: TextStyle(fontSize: 35)),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 40.0),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/home');
-              },
-              child: const Text('Go to Map'),
+            const SizedBox(height: 20),
+            Container(
+              margin: const EdgeInsets.only(top: 40.0, left: 20.0, right: 20.0),
+              child: ElevatedButton(
+                style: filledButtonStyle,
+                onPressed: () {
+                  Navigator.pushNamed(context, '/signin');
+                },
+                child: const Text('Sign In', style: TextStyle(fontSize: 45)),
+              ),
             ),
-          ),
-        ],
+            Container(
+              margin: const EdgeInsets.only(top: 40.0, bottom: 20.0, left: 20.0, right: 20.0),
+              child: TextButton(
+                style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return Colors.blue.withOpacity(0.44);
+                      }
+                      if (states.contains(MaterialState.focused) ||
+                          states.contains(MaterialState.pressed)) {
+                        return Colors.blue.withOpacity(0.82);
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/signup');
+                },
+                child: const Text(
+                  'Make an Account',
+                  style: TextStyle(fontSize: 25, fontFamily: 'Pangolin'),
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 40.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/home');
+                },
+                child: const Text('Go to Map'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
