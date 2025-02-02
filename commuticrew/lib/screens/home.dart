@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   LatLng? currentLocation;
 
   final origin = const LatLng(34.0699, -118.4438);
-  final destination = const LatLng(34.062012, -118.302696);
+  final destination = const LatLng(34.022415, -118.285530);
 
 
   // static const LatLng origin = LatLng(34.0699, -118.4438);  // UCLA

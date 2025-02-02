@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'screens/home.dart';
 import 'screens/signin.dart';
 import 'screens/signup.dart';
+// import 'screens/search.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import "package:path/path.dart" show dirname, join;
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomeScreen(),
         '/signin': (context) => SigninScreen(),
         '/signup': (context) => SignupScreen(),
+        // '/search': (context) => SearchScreen(),
       },
       title: 'CommutiCrew',
       theme: ThemeData(
