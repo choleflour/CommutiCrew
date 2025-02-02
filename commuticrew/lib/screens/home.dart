@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 // import 'package:location/location.dart';
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart' as bg;
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -22,9 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final origin = const LatLng(34.0699, -118.4438);
   final destination = const LatLng(34.062012, -118.302696);
-
-  // static const LatLng origin = LatLng(34.0699, -118.4438);  // UCLA
-  // static const LatLng destination = LatLng(34.062012, -118.302696);  // Ktown
 
   @override
   void initState() {
@@ -45,7 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
     // debugPrint('Location permission denied');
     // You might want to show a dialog here explaining why location is needed
   }
-}
 
   void _initializeLocationTracking() {
   // Configure background geolocation with more specific settings
@@ -76,12 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
         }, (bg.LocationError error) {
           // debugPrint('Location error: ${error.code} - ${error.message}');
         });
-      });
-    }
-  });
-}
-
-  
+      }
+    });
+  }
 
   void _updateUserMarker() {
     if (currentLocation != null) {
@@ -95,8 +89,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       );
     }
-  }
-
   @override
   void dispose() {
     bg.BackgroundGeolocation.stop();
@@ -104,20 +96,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _addMarkers() {
-    markers.add(
+    markers.addAll([
       Marker(
         markerId: const MarkerId('origin'),
         position: origin,
         infoWindow: const InfoWindow(title: 'Origin'),
       ),
-    );
-    markers.add(
       Marker(
         markerId: const MarkerId('destination'),
         position: destination,
         infoWindow: const InfoWindow(title: 'Destination'),
       ),
-    );
+    ]);
   }
 
   Future<void> _getDirections() async {
@@ -262,40 +252,53 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Transit Directions'),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            flex: 2,
-            child: GoogleMap(
-              initialCameraPosition: CameraPosition(
-                target: LatLng(
-                  (origin.latitude + destination.latitude) / 2,
-                  (origin.longitude + destination.longitude) / 2,
-                ),
-                zoom: 6,
-              ),
-              markers: markers,
-              polylines: polylines,
-              onMapCreated: (controller) {
-                mapController = controller;
-              },
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              child: SingleChildScrollView(
-                child: Text(
-                  transitInstructions.isEmpty
-                      ? 'Loading directions...'
-                      : transitInstructions,
-                  style: const TextStyle(fontSize: 16),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 255, 254, 182),
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Container(
+                margin: const EdgeInsets.only(top: 40.0, right: 40.0, left: 40.0, bottom: 40.0),
+                child: GoogleMap(
+                  initialCameraPosition: CameraPosition(
+                    target: LatLng(
+                      (origin.latitude + destination.latitude) / 2,
+                      (origin.longitude + destination.longitude) / 2,
+                    ),
+                    zoom: 6,
+                  ),
+                  markers: markers,
+                  polylines: polylines,
+                  onMapCreated: (controller) {
+                    mapController = controller;
+                  },
                 ),
               ),
             ),
-          ),
-        ],
+            Expanded(
+              flex: 1,
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                child: SingleChildScrollView(
+                  child: Text(
+                    transitInstructions.isEmpty ? 'Loading directions...' : transitInstructions,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+              ),
+            ),
+            Container (
+              height: 300,
+              margin: const EdgeInsets.only(right: 40.0),
+            alignment: Alignment.bottomRight,
+            child: const Image(image: AssetImage('assets/images/alligator.png'))),
+          ],
+        ),
       ),
     );
   }
