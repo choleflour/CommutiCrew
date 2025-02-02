@@ -6,6 +6,7 @@ import 'screens/home.dart';
 import 'screens/signin.dart';
 import 'screens/signup.dart';
 import 'screens/search.dart';
+import 'screens/egg.dart';
 import 'screens/crew.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => SignupScreen(),
         '/search': (context) => SearchScreen(),
         '/crew': (context) => CrewScreen(),
+        '/egg': (context) => EggScreen(),
         
       },
       title: 'CommutiCrew',

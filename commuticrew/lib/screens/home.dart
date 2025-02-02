@@ -263,9 +263,15 @@ void dispose() {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Transit Directions'),
-        centerTitle: true,
-      ),
+  title: const Text('Transit Directions'),
+  centerTitle: true,
+  leading: IconButton(
+    icon: const Icon(Icons.arrow_back), // Back arrow icon
+    onPressed: () {
+      Navigator.pushReplacementNamed(context, '/search'); // Go back to the previous screen
+    },
+  ),
+),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -307,6 +313,40 @@ void dispose() {
                 ),
               ),
             ),
+            Container(
+  // margin: const EdgeInsets.only(right: 20.0),
+  height: 80,
+  alignment: Alignment.bottomRight,
+  child: Stack(
+    children: [
+      const Image(
+        image: AssetImage('assets/images/egg.png'),
+      ),
+      Positioned(
+        bottom: 0, // Adjust position as needed
+        right: 0,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, '/egg'); // Navigate when tapped
+          },
+          child: Container(
+            // padding: const EdgeInsets.all(8),
+            // decoration: BoxDecoration(
+            //   color: Colors.black.withOpacity(0.6), // Background color for visibility
+            //   borderRadius: BorderRadius.circular(8),
+            // ),
+            child: const Text(
+              "Go to Egg",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
+),
+
+
             Container (
               // height: 300,
               margin: const EdgeInsets.only(right: 20.0),
@@ -318,3 +358,4 @@ void dispose() {
     );
   }
 }
+
