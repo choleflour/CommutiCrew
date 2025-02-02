@@ -35,7 +35,8 @@ class BlankScreen extends StatelessWidget {
         decoration: const BoxDecoration(
           color: Color.fromARGB(255, 255, 254, 182),
         ),
-        child: Align(
+        child: Column (
+         children: [ Align(
               alignment: Alignment.center,
               child: Text(
                 "Who's in your current crew?",
@@ -48,7 +49,16 @@ class BlankScreen extends StatelessWidget {
                 ),
               ),
             ),
-        )
+            Container(
+              margin: const EdgeInsets.only(top: 40.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/home');
+                },
+                child: const Text('Go to Map'),
+              ),
+            ),
+        ]))
     );
   }
 }
