@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 // import 'package:location/location.dart';
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart' as bg;
 class HomeScreen extends StatefulWidget {
@@ -30,9 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _addMarkers();
     _getDirections();
-    _checkLocationPermission().then((_) {
-    _initializeLocationTracking();  // Only initialize after checking permissions
-  });
+  //   _checkLocationPermission().then((_) {
+  //   _initializeLocationTracking();  // Only initialize after checking permissions
+  // });
   }
 
   Future<void> _checkLocationPermission() async {
@@ -120,7 +121,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _getDirections() async {
-    const String apiKey = 'AIzaSyAp7H8C7YUWQkRF_63dWzWtZKz2trBMd8U';  // Replace with your API key
+    String apiKey = dotenv.env['GOOGLE_MAPS_API_KEY'] ?? '';
+    // const String apiKey = '';  // Replace with your API key
     final String url = 'https://maps.googleapis.com/maps/api/directions/json?'
         'origin=${origin.latitude},${origin.longitude}'
         '&destination=${destination.latitude},${destination.longitude}'

@@ -57,7 +57,7 @@
         <string>location</string>
     </array>
 <key>GOOGLE_MAPS_API_KEY</key>
-<string>AIzaSyAp7H8C7YUWQkRF_63dWzWtZKz2trBMd8U</string>
+<string>AIzaSyAkH35fJ-y-Ecr7Uud2Ppy5jsWdoADTZNw</string>
 <key>keychain-access-groups</key>
 <array>
     <string>$(AppIdentifierPrefix)com.yourcompany.yourapp</string>

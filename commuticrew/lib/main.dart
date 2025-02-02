@@ -1,14 +1,41 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'screens/home.dart';
 import 'screens/signin.dart';
 import 'screens/signup.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import "package:path/path.dart" show dirname, join;
+import 'dart:io' show Platform;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await FirebaseAuth.instance.signOut();
+  try {
+    
+    // String fn = join(dirname(Platform.script.path), '../.env');
+    // print(fn);
+    
+
+    await dotenv.load(fileName: '/Users/chloechang/CommutiCrew/commuticrew/.env');
+  } catch (e) {
+    print("Error loading .env file: $e");
+  }
+  // initializeGoogleMaps();
   runApp(const MyApp());
 }
+
+
+// void initializeGoogleMaps() {
+//   String apiKey = dotenv.env['GOOGLE_MAPS_API_KEY'] ?? '';
+//   if (apiKey.isNotEmpty) {
+//     GMSServices.provideAPIKey(apiKey);
+//   } else {
+//     throw Exception("Google Maps API Key not found in .env");
+//   }
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -36,7 +63,6 @@ class MyApp extends StatelessWidget {
       },
       title: 'CommutiCrew',
       theme: ThemeData(
-        fontFamily: 'Padauk',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -96,7 +122,6 @@ class MyHomePage extends StatelessWidget {
                 color: Colors.blue[900],
                 fontWeight: FontWeight.bold,
                 fontSize: 80,
-                fontFamily: 'Pangolin',
               ),
             ),
           ),
@@ -133,7 +158,7 @@ class MyHomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/signup');
               },
               child:
-                  const Text('Make an Account', style: TextStyle(fontSize: 35, fontFamily: 'Pangolin')),
+                  const Text('Make an Account', style: TextStyle(fontSize: 35)),
             ),
           ),
           Container(
