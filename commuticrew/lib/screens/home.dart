@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+// import 'package:location/location.dart';
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart' as bg;
 
 class HomeScreen extends StatefulWidget {
@@ -27,44 +29,49 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _addMarkers();
     _getDirections();
-    _checkLocationPermission().then((_) {
-      _initializeLocationTracking();
-    });
+  //   _checkLocationPermission().then((_) {
+  //   _initializeLocationTracking();  // Only initialize after checking permissions
+  // });
   }
 
   Future<void> _checkLocationPermission() async {
-    final status = await bg.BackgroundGeolocation.requestPermission();
-    debugPrint('Permission status: $status');
-    if (status != true) {
-      debugPrint('Location permission denied');
-    }
+  final status = await bg.BackgroundGeolocation.requestPermission();
+  // debugPrint('Permission status: $status');
+  
+  if (status != true) {
+    // Handle permission denied case
+    // debugPrint('Location permission denied');
+    // You might want to show a dialog here explaining why location is needed
   }
 
   void _initializeLocationTracking() {
-    bg.BackgroundGeolocation.ready(bg.Config(
-      desiredAccuracy: bg.Config.DESIRED_ACCURACY_HIGH,
-      distanceFilter: 10.0,
-      stopOnTerminate: false,
-      startOnBoot: true,
-      debug: true,
-      logLevel: bg.Config.LOG_LEVEL_VERBOSE,
-      preventSuspend: true,
-      locationUpdateInterval: 1000,
-      fastestLocationUpdateInterval: 500,
-      allowIdenticalLocations: true,
-    )).then((bg.State state) {
-      if (!state.enabled) {
-        bg.BackgroundGeolocation.start().then((bg.State state) {
-          debugPrint('[BackgroundGeolocation] started successfully');
-          bg.BackgroundGeolocation.onLocation((bg.Location location) {
-            debugPrint('Location: ${location.coords.latitude}, ${location.coords.longitude}');
-            setState(() {
-              currentLocation = LatLng(location.coords.latitude, location.coords.longitude);
-              _updateUserMarker();
-            });
-          }, (bg.LocationError error) {
-            debugPrint('Location error: ${error.code} - ${error.message}');
+  // Configure background geolocation with more specific settings
+  bg.BackgroundGeolocation.ready(bg.Config(
+    desiredAccuracy: bg.Config.DESIRED_ACCURACY_HIGH,
+    distanceFilter: 10.0,
+    stopOnTerminate: false,
+    startOnBoot: true,
+    debug: true,
+    logLevel: bg.Config.LOG_LEVEL_VERBOSE,
+    // Add these additional configurations
+    preventSuspend: true,
+    locationUpdateInterval: 1000,
+    fastestLocationUpdateInterval: 500,
+    allowIdenticalLocations: true
+  )).then((bg.State state) {
+    if (!state.enabled) {
+      bg.BackgroundGeolocation.start().then((bg.State state) {
+        // debugPrint('[BackgroundGeolocation] started successfully');
+        
+        // Add location listener after successful start
+        bg.BackgroundGeolocation.onLocation((bg.Location location) {
+          // debugPrint('Location: ${location.coords.latitude}, ${location.coords.longitude}');
+          setState(() {
+            currentLocation = LatLng(location.coords.latitude, location.coords.longitude);
+            _updateUserMarker();
           });
+        }, (bg.LocationError error) {
+          // debugPrint('Location error: ${error.code} - ${error.message}');
         });
       }
     });
@@ -82,8 +89,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       );
     }
-  }
-
   @override
   void dispose() {
     bg.BackgroundGeolocation.stop();
@@ -106,7 +111,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _getDirections() async {
-    const String apiKey = 'AIzaSyAp7H8C7YUWQkRF_63dWzWtZKz2trBMd8U';  // Replace with your API key
+    String apiKey = dotenv.env['GOOGLE_MAPS_API_KEY'] ?? '';
+    // const String apiKey = '';  // Replace with your API key
     final String url = 'https://maps.googleapis.com/maps/api/directions/json?'
         'origin=${origin.latitude},${origin.longitude}'
         '&destination=${destination.latitude},${destination.longitude}'
@@ -117,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
+        print(data);
         
         if (data['status'] == 'OK') {
           _decodePolyline(data['routes'][0]['overview_polyline']['points']);
@@ -124,13 +131,13 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       }
     } catch (e) {
-      debugPrint('Error fetching directions: $e');
+      // debugPrint('Error fetching directions: $e');
     }
   }
   void _zoomToFitRoute() {
     if (polylineCoordinates.isEmpty) return;
     
-    debugPrint('Zooming to fit route');  // Debug print
+    // debugPrint('Zooming to fit route');  // Debug print
 
     // Create bounds from all points
     double southwestLat = polylineCoordinates.first.latitude;
@@ -152,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
       northeast: LatLng(northeastLat, northeastLng),
     );
 
-    debugPrint('Bounds calculated: $bounds');  // Debug print
+    // debugPrint('Bounds calculated: $bounds');  // Debug print
 
     // Add padding to the bounds
     mapController?.animateCamera(

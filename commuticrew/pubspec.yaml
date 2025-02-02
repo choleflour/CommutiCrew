@@ -40,8 +40,7 @@ dependencies:
   location: ^8.0.0
   flutter_background_geolocation: ^4.16.6
   firebase_auth: ^5.4.1
-  firebase_core: ^3.10.1
-  firebase_core_web: ^2.19.0
+  flutter_dotenv: ^5.1.0
 
 
 dev_dependencies:
