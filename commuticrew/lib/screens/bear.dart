@@ -17,13 +17,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CrewScreen(),
+      home: BearScreen(),
     );
   }
 }
 
-class CrewScreen extends StatelessWidget {
-  const CrewScreen({super.key});
+class BearScreen extends StatelessWidget {
+  const BearScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,30 +33,37 @@ class CrewScreen extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 255, 254, 182),
+          color : Color(0xff4864D5),
         ),
         child: Column (
-         children: [ Container(
-              // alignment: Alignment.center,
-              margin: const EdgeInsets.only(top: 80.0),
+         children: [ Align(
+              alignment: Alignment.center,
               child: Text(
-                "Who's in your current crew?",
+                "MEET JOE THE BRUIN BEAR!!",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color : Color(0xffd7263d),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 32,
                   fontFamily: 'Pangolin',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 64,
+                  color : Color(0xffffffff),
                 ),
               ),
             ),
-            const Image(image: AssetImage('assets/images/traveler.png')),
-            Text(
-                'This is Traveler the Horse! You met him at USC on February 1st, 2025. Traveler has traveled 13 miles with you on public transit so far! He is so excited to go on even more adventures and his daily travel tip today is "USC students can register for their own UPass and travel around Los Angeles on public transit for free!',
+            const Image(image: AssetImage('assets/images/joe.png')),
+          
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                "Joe will accompany you along with Traveler and the rest of your CommutiCrew! Keep traveling around Los Angeles and beyond to unlock more friends!",
                 textAlign: TextAlign.center,
                 style: TextStyle(
+                  // fontFamily: 'Pangolin',
+                  fontSize: 29,
                 ),
               ),
+            ),
+            
+           
             Container(
               margin: const EdgeInsets.only(top: 40.0),
               child: ElevatedButton(

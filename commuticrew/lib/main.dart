@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
         '/signin': (context) => SigninScreen(),
         '/signup': (context) => SignupScreen(),
         '/search': (context) => SearchScreen(),
-        '/crew': (context) => BlankScreen(),
+        '/crew': (context) => CrewScreen(),
         
       },
       title: 'CommutiCrew',
