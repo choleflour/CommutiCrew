@@ -36,15 +36,16 @@ class BlankScreen extends StatelessWidget {
           color: Color.fromARGB(255, 255, 254, 182),
         ),
         child: Column (
-         children: [ Align(
-              alignment: Alignment.center,
+         children: [ Container(
+              // alignment: Alignment.center,
+              margin: const EdgeInsets.only(top: 80.0),
               child: Text(
                 "Who's in your current crew?",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color : Color(0xffd7263d),
                   fontWeight: FontWeight.bold,
-                  fontSize: 64,
+                  fontSize: 32,
                   fontFamily: 'Pangolin',
                 ),
               ),
