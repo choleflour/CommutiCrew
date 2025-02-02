@@ -38,11 +38,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _checkLocationPermission() async {
   final status = await bg.BackgroundGeolocation.requestPermission();
-  debugPrint('Permission status: $status');
+  // debugPrint('Permission status: $status');
   
   if (status != true) {
     // Handle permission denied case
-    debugPrint('Location permission denied');
+    // debugPrint('Location permission denied');
     // You might want to show a dialog here explaining why location is needed
   }
 }
@@ -64,17 +64,17 @@ class _HomeScreenState extends State<HomeScreen> {
   )).then((bg.State state) {
     if (!state.enabled) {
       bg.BackgroundGeolocation.start().then((bg.State state) {
-        debugPrint('[BackgroundGeolocation] started successfully');
+        // debugPrint('[BackgroundGeolocation] started successfully');
         
         // Add location listener after successful start
         bg.BackgroundGeolocation.onLocation((bg.Location location) {
-          debugPrint('Location: ${location.coords.latitude}, ${location.coords.longitude}');
+          // debugPrint('Location: ${location.coords.latitude}, ${location.coords.longitude}');
           setState(() {
             currentLocation = LatLng(location.coords.latitude, location.coords.longitude);
             _updateUserMarker();
           });
         }, (bg.LocationError error) {
-          debugPrint('Location error: ${error.code} - ${error.message}');
+          // debugPrint('Location error: ${error.code} - ${error.message}');
         });
       });
     }
@@ -133,6 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
+        print(data);
         
         if (data['status'] == 'OK') {
           _decodePolyline(data['routes'][0]['overview_polyline']['points']);
@@ -140,13 +141,13 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       }
     } catch (e) {
-      debugPrint('Error fetching directions: $e');
+      // debugPrint('Error fetching directions: $e');
     }
   }
   void _zoomToFitRoute() {
     if (polylineCoordinates.isEmpty) return;
     
-    debugPrint('Zooming to fit route');  // Debug print
+    // debugPrint('Zooming to fit route');  // Debug print
 
     // Create bounds from all points
     double southwestLat = polylineCoordinates.first.latitude;
@@ -168,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
       northeast: LatLng(northeastLat, northeastLng),
     );
 
-    debugPrint('Bounds calculated: $bounds');  // Debug print
+    // debugPrint('Bounds calculated: $bounds');  // Debug print
 
     // Add padding to the bounds
     mapController?.animateCamera(
