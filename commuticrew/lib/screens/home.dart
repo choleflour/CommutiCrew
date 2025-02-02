@@ -276,6 +276,7 @@ void dispose() {
             Expanded(
               flex: 2,
               child: Container(
+                height: 1000,
                 margin: const EdgeInsets.only(top: 40.0, right: 40.0, left: 40.0, bottom: 40.0),
                 child: GoogleMap(
                   initialCameraPosition: CameraPosition(
@@ -306,8 +307,8 @@ void dispose() {
               ),
             ),
             Container (
-              height: 300,
-              margin: const EdgeInsets.only(right: 40.0),
+              // height: 300,
+              margin: const EdgeInsets.only(right: 20.0),
             alignment: Alignment.bottomRight,
             child: const Image(image: AssetImage('assets/images/alligator.png'))),
           ],
