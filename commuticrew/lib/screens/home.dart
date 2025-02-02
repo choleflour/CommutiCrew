@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   LatLng? currentLocation;
 
   final origin = const LatLng(34.0699, -118.4438);
-  final destination = const LatLng(34.073341, -118.447418);
+  final destination = const LatLng(34.062012, -118.302696);
 
   // static const LatLng origin = LatLng(34.0699, -118.4438);  // UCLA
   // static const LatLng destination = LatLng(34.062012, -118.302696);  // Ktown
@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _getDirections() async {
-    const String apiKey = 'AIzaSyC0PWvwGYzaNtbQF7Q72pkkkyd_YEZDuvg';  // Replace with your API key
+    const String apiKey = 'AIzaSyAp7H8C7YUWQkRF_63dWzWtZKz2trBMd8U';  // Replace with your API key
     final String url = 'https://maps.googleapis.com/maps/api/directions/json?'
         'origin=${origin.latitude},${origin.longitude}'
         '&destination=${destination.latitude},${destination.longitude}'

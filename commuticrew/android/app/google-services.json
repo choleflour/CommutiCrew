@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "580545643050",
+    "project_id": "communiticrew",
+    "storage_bucket": "communiticrew.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:580545643050:android:806dc7a3b67a6bd77f7953",
+        "android_client_info": {
+          "package_name": "com.example.commuticrew"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS9Xz_kHexEqyqLfe6eJ8LpJJHQR5CUak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

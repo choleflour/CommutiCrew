@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'screens/home.dart';
 import 'screens/signin.dart';
-
-void main() {
+import 'screens/signup.dart';
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -14,11 +17,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          }
+          if (snapshot.hasData) {
+            return const HomeScreen();
+          }
+          return const NavigationScreen();
+        },
+      ),
       routes: {
-        '/': (context) => const NavigationScreen(),
         '/home': (context) => const HomeScreen(),
         '/signin': (context) => SigninScreen(),
+        '/signup': (context) => SignupScreen(),
       },
       title: 'CommutiCrew',
       theme: ThemeData(
@@ -113,8 +127,11 @@ class MyHomePage extends StatelessWidget {
                   },
                 ),
               ),
-              onPressed: () {},
-              child: const Text('Make an Account', style: TextStyle(fontSize: 35)),
+              onPressed: () {
+                Navigator.pushNamed(context, '/signup');
+              },
+              child:
+                  const Text('Make an Account', style: TextStyle(fontSize: 35)),
             ),
           ),
           Container(
