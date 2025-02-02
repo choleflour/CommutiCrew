@@ -26,82 +26,83 @@ class _HomeScreenState extends State<HomeScreen> {
   // static const LatLng origin = LatLng(34.0699, -118.4438);  // UCLA
   // static const LatLng destination = LatLng(34.062012, -118.302696);  // Ktown
 
-  @override
-  void initState() {
-    super.initState();
-    _addMarkers();
-    _getDirections();
-  //   _checkLocationPermission().then((_) {
-  //   _initializeLocationTracking();  // Only initialize after checking permissions
-  // });
-  }
-
-  Future<void> _checkLocationPermission() async {
-  final status = await bg.BackgroundGeolocation.requestPermission();
-  // debugPrint('Permission status: $status');
-  
-  if (status != true) {
-    // Handle permission denied case
-    // debugPrint('Location permission denied');
-    // You might want to show a dialog here explaining why location is needed
-  }
+ @override
+void initState() {
+  super.initState();
+  _addMarkers();
+  _getDirections();
+  _checkLocationPermission();
 }
 
-  void _initializeLocationTracking() {
-  // Configure background geolocation with more specific settings
+
+Future<void> _checkLocationPermission() async {
+  final status = await bg.BackgroundGeolocation.requestPermission();
+  print('status: $status');
+
+  if (status != true) {
+    print('Location permission denied');
+    return;
+  }
+
+  _initializeLocationTracking(); // Start tracking after permission is granted
+}
+
+void _initializeLocationTracking() {
   bg.BackgroundGeolocation.ready(bg.Config(
     desiredAccuracy: bg.Config.DESIRED_ACCURACY_HIGH,
-    distanceFilter: 10.0,
-    stopOnTerminate: false,
-    startOnBoot: true,
-    debug: true,
+    distanceFilter: 10.0,  // Min distance before triggering an update
+    stopOnTerminate: false, // Continue tracking after app closes
+    startOnBoot: true,      // Restart tracking after device reboot
+    debug: true,            // Show debugging notifications
     logLevel: bg.Config.LOG_LEVEL_VERBOSE,
-    // Add these additional configurations
-    preventSuspend: true,
-    locationUpdateInterval: 1000,
-    fastestLocationUpdateInterval: 500,
+    preventSuspend: true,   // Keep app active for background tracking
+    locationUpdateInterval: 1000, // 1 second interval
+    fastestLocationUpdateInterval: 500, // Minimum update time
     allowIdenticalLocations: true
   )).then((bg.State state) {
     if (!state.enabled) {
       bg.BackgroundGeolocation.start().then((bg.State state) {
-        // debugPrint('[BackgroundGeolocation] started successfully');
+        debugPrint('[BackgroundGeolocation] started successfully');
         
-        // Add location listener after successful start
+        // Listen for background location updates
         bg.BackgroundGeolocation.onLocation((bg.Location location) {
-          // debugPrint('Location: ${location.coords.latitude}, ${location.coords.longitude}');
+          debugPrint('Location: ${location.coords.latitude}, ${location.coords.longitude}');
           setState(() {
             currentLocation = LatLng(location.coords.latitude, location.coords.longitude);
             _updateUserMarker();
           });
         }, (bg.LocationError error) {
-          // debugPrint('Location error: ${error.code} - ${error.message}');
+          debugPrint('Location error: ${error.code} - ${error.message}');
         });
       });
     }
   });
 }
 
+
   
 
   void _updateUserMarker() {
-    if (currentLocation != null) {
-      markers.removeWhere((marker) => marker.markerId.value == 'user');
-      markers.add(
-        Marker(
-          markerId: const MarkerId('user'),
-          position: currentLocation!,
-          infoWindow: const InfoWindow(title: 'Your Location'),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-        ),
-      );
-    }
+  if (currentLocation != null) {
+    markers.removeWhere((marker) => marker.markerId.value == 'user');
+    markers.add(
+      Marker(
+        markerId: const MarkerId('user'),
+        position: currentLocation!,
+        infoWindow: const InfoWindow(title: 'Your Location'),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+      ),
+    );
+    setState(() {}); // Update UI
   }
+}
+
 
   @override
-  void dispose() {
-    bg.BackgroundGeolocation.stop();
-    super.dispose();
-  }
+void dispose() {
+  bg.BackgroundGeolocation.stop();
+  super.dispose();
+}
 
   void _addMarkers() {
     markers.add(
@@ -133,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        print(data);
+        // print(data);
         
         if (data['status'] == 'OK') {
           _decodePolyline(data['routes'][0]['overview_polyline']['points']);
