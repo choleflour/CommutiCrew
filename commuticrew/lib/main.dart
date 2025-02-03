@@ -59,6 +59,7 @@ class MyApp extends StatelessWidget {
           return const NavigationScreen();
         },
       ),
+      initialRoute: '/',
       routes: {
         '/home': (context) => const HomeScreen(),
         '/signin': (context) => SigninScreen(),
@@ -142,17 +143,17 @@ class MyHomePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Container(
-              margin: const EdgeInsets.only(top: 40.0, left: 20.0, right: 20.0),
+              margin: const EdgeInsets.only(top: 5.0, left: 20.0, right: 20.0, bottom: 0.0),
               child: ElevatedButton(
                 style: filledButtonStyle,
                 onPressed: () {
                   Navigator.pushNamed(context, '/signin');
                 },
-                child: const Text('Sign In', style: TextStyle(fontSize: 45)),
+                child: const Text('Sign In', style: TextStyle(fontSize: 32)),
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 40.0, bottom: 20.0, left: 20.0, right: 20.0),
+              margin: const EdgeInsets.only(top: 10.0, bottom: 10.0, left: 20.0, right: 20.0),
               child: TextButton(
                 style: ButtonStyle(
                   foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
@@ -179,7 +180,7 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 20.0),
+              margin: const EdgeInsets.only(top: 15.0),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/search');
@@ -196,15 +197,7 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             
-            Container(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/crew');
-                },
-                child: const Text('Check Current Crew!',
-                style: TextStyle(fontSize: 25, fontFamily: 'Pangolin')),
-              ),
-            ),
+            
           ],
         ),
       ),

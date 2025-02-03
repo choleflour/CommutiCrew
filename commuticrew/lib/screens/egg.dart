@@ -44,7 +44,7 @@ class EggScreen extends StatelessWidget {
                 style: TextStyle(
                   color : Color(0xff4864D5),
                   fontWeight: FontWeight.bold,
-                  fontSize: 64,
+                  fontSize: 44,
                 ),
               ),
             ),
@@ -56,7 +56,7 @@ class EggScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Pangolin',
-                  fontSize: 34,
+                  fontSize: 24,
                 ),
               ),
             ),
@@ -67,14 +67,14 @@ class EggScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   // fontFamily: 'Pangolin',
-                  fontSize: 29,
+                  fontSize: 24,
                 ),
               ),
             ),
             
           
             Container(
-              margin: const EdgeInsets.only(top: 40.0),
+              margin: const EdgeInsets.only(top: 20.0),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/home');
@@ -82,6 +82,15 @@ class EggScreen extends StatelessWidget {
                 child: const Text('Go to Map'),
               ),
             ),
+            // Container(
+            //   // margin: const EdgeInsets.only(top: 40.0),
+            //   child: ElevatedButton(
+            //     onPressed: () {
+            //       Navigator.pushNamed(context, '/');
+            //     },
+            //     child: const Text('Back'),
+            //   ),
+            // ),
         ]))
     );
   }

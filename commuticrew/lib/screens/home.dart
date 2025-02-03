@@ -347,11 +347,21 @@ void dispose() {
 ),
 
 
-            Container (
-              // height: 300,
-              margin: const EdgeInsets.only(right: 20.0),
-            alignment: Alignment.bottomRight,
-            child: const Image(image: AssetImage('assets/images/alligator.png'))),
+            // Container (
+            //   // height: 300,
+            //   margin: const EdgeInsets.only(left: 60.0),
+            // alignment: Alignment.bottomRight,
+            // // child: const Image(image: AssetImage('assets/images/alligator.png'))
+            // ),
+            Container(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/crew');
+                },
+                child: const Text('Check Current Crew!',
+                style: TextStyle(fontSize: 25, fontFamily: 'Pangolin')),
+              ),
+            ),
           ],
         ),
       ),
